@@ -17,6 +17,8 @@
         {
             // User input
             START:
+            firstOhYeah = null;
+            secondOhYeah = null;
             Console.WriteLine("Path to file full of wordzz:");
 
             var filePath = Console.ReadLine();
@@ -44,13 +46,14 @@
             GoForIt(wordsAlphaOrdered);
             sw.Stop();
             LetTheWorldKnow(sw.ElapsedMilliseconds);
-            Console.ReadLine();
+            goto START;
+            // Console.ReadLine();
         }
 
         public static void GoForIt(string[] wordsAlphaOrdered)
         {
             // Sort by descending for string length.
-            var wordsSizeDescOrdered = wordsAlphaOrdered.OrderByDescending(item => item.Length);
+            var wordsSizeDescOrdered = wordsAlphaOrdered.OrderByDescending(item => item.Length).ThenByDescending(item => item).ToList();
 
             // Pick each item from above sort once by one to find a match of what we are looking for.
             foreach (var wordItem in wordsSizeDescOrdered)
